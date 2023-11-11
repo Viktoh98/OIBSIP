@@ -1,0 +1,61 @@
+{% extends "base.html" %} {% load static%} {% block css%}
+<link rel="stylesheet" type="text/css" href="{% static 'tasks/task.css' %}" />
+<script defer src="{% static 'tasks/js/index.js' %}"></script>
+{% endblock %} {% block content %}
+<section id="taskSection" class="task__section">
+  <div class="task__list">
+    <nav class="task__list-nav">
+      <ul>
+        <li
+          class="{% if request.path == '/' and not request.GET.status %}nav-active{% endif %}"
+        >
+          <a href=".">All</a>
+        </li>
+        <li
+          class="{% if request.GET.status|lower == 'pending' %}nav-active{% endif %}"
+        >
+          <a href="?status=pending">Pending</a>
+        </li>
+        <li
+          class="{% if request.GET.status|lower == 'completed'%}nav-active{% endif %}"
+        >
+          <a href="?status=Completed">Completed</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="tasks__list">
+      <div id="addButton" class="add-icon">
+        <i class="fa fa-plus"></i>
+      </div>
+      {% if tasks|length > 0 %} {% for task in tasks %}
+      <div class="task" data-id="{{task.id}}">
+        <div class="task__details">
+          <h3>{{task.title}}</h3>
+          <p>{{task.detail|truncatewords:7}}</p>
+          <p>{{task.created_at}}</p>
+        </div>
+        <div class="task__icons">
+          {% if task.isCompleted %}
+          <i class="fa fa-check task-done"></i>
+          {% else %}
+          <i class="fa fa-times task-undone"></i>
+          {% endif %}
+          <button type="button" class="deleteButton">
+            <i class="fa fa-trash-can"></i>
+          </button>
+        </div>
+      </div>
+      {% endfor %}
+      {% else %}
+        <div class="no-task">
+          <h1>Create a task</h1>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+  <div class="task__edit">
+    <h2>Add Task</h2>
+    {% include "tasks/display.html" with tasks=tasks request=request %}
+  </div>
+</section>
+{% endblock %}

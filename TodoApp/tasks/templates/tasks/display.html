@@ -1,0 +1,33 @@
+<form id="myForm" method="post">
+  {% csrf_token %}
+  <div class="form__title-div">
+    <input type="hidden" name="owner" value="{{request.user.id}}" />
+    <label for="title">Title:</label>
+    <input type="text" name="title" id="title" placeholder="title" />
+  </div>
+  <div class="form__detail-div">
+    <textarea
+      name="detail"
+      id="detail"
+      cols="40"
+      rows="10"
+      placeholder="tell us more"
+    ></textarea>
+  </div>
+  <div class="form__date-div">
+    <label for="due_date">Due_date:</label>
+    <input type="date" name="due_date" id="due_date" />
+  </div>
+  <div>
+    <label for="isCompleted">Completed:</label>
+    <input type="checkbox" name="isCompleted" id="isCompleted" />
+  </div>
+  <div class="error__div">
+    <p id="errorMessage"></p>
+  </div>
+  <div class="form__button-div">
+    <button type="submit" id="submitBtn" class="create_btn" data-type="create">
+      Add
+    </button>
+  </div>
+</form>

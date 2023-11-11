@@ -1,0 +1,111 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/registration.css' %}"
+    />
+    <script defer src="{% static 'js/registration.js' %}"></script>
+  </head>
+  <body>
+    <div class="form__container">
+      <form
+        method="post"
+        action="{% url 'tasks:register' %}"
+        class="register__form {% if request.path == '/register/' %} active {% endif %}"
+        
+      >    
+        <h2>Register</h2>
+        {% csrf_token %}
+        <div class="form__username">
+          <div><label for="username">username</label></div>
+          <input type="text" name="username" id="username" required />
+          {% if messages %} 
+            {% for key, message in messages.items %}
+              {% if key == 'username'%}
+                <p class="error-message">{{message}}</p>
+              {% endif %} 
+            {% endfor %} 
+          {% endif %}
+        </div>
+        <div class="form__password">
+          <div><label for="password1">password</label></div>
+          <input
+            type="password"
+            name="password1"
+            id="password1"
+            pattern=".{8,}"
+            placeholder="At least 8 characters"
+            required
+          />
+        </div>
+        {% if messages %} 
+            {% for key, message in messages.items %}
+              {% if key == 'password1' %}
+                <p class="error-message">{{message}}</p>
+              {% endif %} 
+            {% endfor %}
+          {% else %} 
+            <span class="help-text">must contain letter, numbers and special characters</span>
+          {% endif %}
+        <div class="form__confirm-pass">
+          <div><label for="password2">confirm-password</label></div>
+          <input
+            type="password"
+            name="password2"
+            id="password2"
+            pattern=".{8,}"
+            required
+          />
+          {% if messages %} 
+            {% for key, message in messages.items %}
+              {% if key == 'password2' %}
+                <p class="error-message">{{message}}</p>
+              {% endif %} 
+            {% endfor %} 
+          {% endif %}
+        </div>      
+        <div class="form__submit">
+          <button type="submit">Register</button>
+        </div>
+        <p class="toggle-text">
+          Already have an account? <a href="#" class="toggle">login</a>
+        </p>
+      </form>
+
+      <form method="post" action="{% url 'tasks:login' %}" 
+      class="register__form {% if request.path == '/login/' %} active {% endif %}">
+        <h2>Login</h2>
+        {% csrf_token %}
+        <div class="form__username">
+          <div><label for="username">username</label></div>
+          <input type="text" name="username" id="username" required/>
+        </div>
+        <div class="form__password">
+          <div><label for="password1">password</label></div>
+          <input
+            type="password"
+            name="password"
+            id="password1"
+            pattern=".{8,}"
+            required
+          />
+        </div>
+        {% if messages %}
+          <p class="error-message">{{message}}</p>
+        {% endif %}
+        <div class="form__submit">
+          <button type="submit">Login</button>
+        </div>
+        <p class="toggle-text">
+          Don't have an account? <a href="#" class="toggle">Sign up</a>
+        </p>
+      </form>
+    </div>
+  </body>
+</html>
