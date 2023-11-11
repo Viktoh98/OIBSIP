@@ -3,7 +3,7 @@ from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.forms.models import model_to_dict
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse
 from . models import Task
 from . forms import TaskForm, CustomUserCreationForm
 from django.contrib.auth import authenticate, login
@@ -41,7 +41,7 @@ class TaskDetailView(LoginRequiredMixin, View):
             data['created_at'] = str(obj.created_at)
             serialized_data.append(data)
             return JsonResponse(serialized_data, safe=False)
-        return HttpResponse('something went wrong', status=400)
+        return JsonResponse({'error': 'Something went wrong'}, status=400)
 
 
 class TaskCreateView(LoginRequiredMixin, View):

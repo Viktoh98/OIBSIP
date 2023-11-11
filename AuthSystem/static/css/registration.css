@@ -1,0 +1,104 @@
+body {
+  height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.form__container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background-image: url(../images/creative-flat-lay-photo-workspace-desk.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+form {
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  left: 50%;
+  top: 50%;
+  position: absolute;
+  transition: transform 1s, opacity 0.8s;
+}
+
+form h2 {
+  text-align: center;
+  color: #1d94f7;
+}
+
+form.active {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  background-color: #ffffffd2;
+  padding: 2rem;
+  box-shadow: 0 0 15px 5px #1d95f71a;
+  border-radius: 1rem;
+  display: block;
+  opacity: 1;
+  transition: transform 1s, opacity 0.8s;
+}
+
+form div {
+  padding: 0.5rem 0;
+}
+
+form input {
+  border: 1px solid #1d94f7;
+  border-radius: 5px;
+  padding: 0.35rem 0.8rem;
+  background-color: #fff;
+}
+form input:focus {
+  outline: 1.1px solid #1d94f7;
+}
+
+.form__submit {
+  padding: 1rem 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form__submit button {
+  padding: 0.7rem 1.5rem;
+  width: 90%;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  background-color: #1d94f7;
+  cursor: pointer;
+}
+
+form input:focus:invalid {
+  outline-color: red;
+  border: none;
+  box-shadow: 0 0 5px 4px rgba(243, 28, 28, 0.15);
+}
+
+.help-text {
+  font-size: 0.8rem;
+  display: block;
+  color: #1d94f7;
+}
+
+.toggle-text,
+.toggle-text a {
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.error-message {
+  margin: 0;
+  padding: 0.2rem;
+  font-size: 0.8rem;
+  color: #ff0000;
+}

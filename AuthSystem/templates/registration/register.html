@@ -16,7 +16,7 @@
     <div class="form__container">
       <form
         method="post"
-        action="{% url 'tasks:register' %}"
+        action="{% url 'protected:register' %}"
         class="register__form {% if request.path == '/register/' %} active {% endif %}"
         
       >    
@@ -78,7 +78,7 @@
         </p>
       </form>
 
-      <form method="post" action="{% url 'tasks:login' %}" 
+      <form method="post" action="{% url 'protected:login' %}" 
       class="register__form {% if request.path == '/login/' %} active {% endif %}">
         <h2>Login</h2>
         {% csrf_token %}
